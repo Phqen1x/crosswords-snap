@@ -1,0 +1,54 @@
+name: crosswords
+adopt-info: crosswords
+grade: stable
+confinement: strict
+base: core24
+contact: https://github.com/phqenix/crosswords-snap/issues
+issues: https://github.com/phqenix/crosswords-snap/issues
+website: https://gitlab.gnome.org/jrb/crosswords
+license: GPL-3.0+
+icon: icon512.png
+
+slots:
+  # for GtkApplication registration
+  crosswords:
+    interface: dbus
+    bus: session
+    name: org.gnome.Crosswords
+  crossword-editor:
+    interface: dbus
+    bus: session
+    name: org.gnome.Crosswords.Editor
+
+apps:
+  crosswords:
+    extensions: [gnome]
+    command: usr/bin/crosswords
+    desktop: usr/share/applications/org.gnome.Crosswords.desktop
+    common-id: org.gnome.Crosswords
+  editor:
+    extensions: [gnome]
+    command: usr/bin/crossword-editor
+    desktop: usr/share/applications/org.gnome.Crosswords.Editor.desktop
+
+parts:
+  crosswords:
+    source: https://gitlab.gnome.org/jrb/crosswords.git
+    source-type: git
+    source-tag: 0.3.14
+    plugin: meson
+    meson-parameters: [--prefix=/usr, -Ddevelopment=false]
+    parse-info: [usr/share/metainfo/org.gnome.Crosswords.metainfo.xml]
+    build-packages: 
+      - cargo
+      - python3-jinja2
+      - python3-markdown
+      - python3-markupsafe
+      - python3-pygments
+      - python3-typogrify
+    stage-packages:
+      - python3-jinja2
+      - python3-markdown
+      - python3-markupsafe
+      - python3-pygments
+      - python3-typogrify
