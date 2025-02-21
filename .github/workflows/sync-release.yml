@@ -24,7 +24,7 @@ jobs:
           echo "$VERSION"
           echo "test"
           if [ ${#VERSION} -gt 0 ]; then
-            sed -i 's/^\(source-tag: \).*$/\1'"$VERSION"'/' snap/snapcraft.yaml
+            sed -i 's/source-tag: .*$/source-tag: '"$VERSION"'/g' snap/snapcraft.yaml
           fi
           
       - name: Check for modified files
