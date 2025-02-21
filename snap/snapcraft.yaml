@@ -8,6 +8,9 @@ issues: https://github.com/phqenix/crosswords-snap/issues
 website: https://gitlab.gnome.org/jrb/crosswords
 license: GPL-3.0+
 icon: icon512.png
+platforms:
+  amd64:
+  arm64:
 
 slots:
   # for GtkApplication registration
