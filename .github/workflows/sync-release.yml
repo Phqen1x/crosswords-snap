@@ -1,0 +1,40 @@
+name: Sync with upstream
+
+on:
+  # Runs at 10:00 UTC every day
+  schedule:
+    - cron:  '0 10 * * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      - name: Fetch release version
+        run: |
+          VERSION=$(
+            curl -sL https://gitlab.gnome.org/jrb/crosswords/-/releases.json |
+            jq -c  '.[]' | grep -v beta | grep -v rc | head -n 1 | jq | grep \"tag\" |
+            awk -F ": \"" '{print $2}' | awk -F "\"" '{print $1}'
+          )
+          if [ ${#VERSION} -gt 0 ]; then
+            sed -i 's/^\(source-tag: \).*$/\1'"$VERSION"'/' snap/snapcraft.yaml
+          fi
+          
+      - name: Check for modified files
+        id: git-check
+        run: |
+          MODIFIED=$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+          echo "modified=$MODIFIED" >> $GITHUB_OUTPUT
+      - name: Commit latest release version
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --global user.name 'Drew VanDine'
+          git config --global user.email 'avandine23@gmail.com'
+          git commit -am "Automatic sync to latest release"
+          git push
+
