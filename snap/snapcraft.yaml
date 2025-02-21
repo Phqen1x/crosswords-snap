@@ -35,7 +35,7 @@ parts:
   crosswords:
     source: https://gitlab.gnome.org/jrb/crosswords.git
     source-type: git
-    source-tag: 0.3.14
+    source-tag: 0.3.13
     plugin: meson
     meson-parameters: [--prefix=/usr, -Ddevelopment=false]
     parse-info: [usr/share/metainfo/org.gnome.Crosswords.metainfo.xml]
