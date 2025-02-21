@@ -21,6 +21,7 @@ jobs:
             jq -c  '.[]' | grep -v beta | grep -v rc | head -n 1 | jq | grep \"tag\" |
             awk -F ": \"" '{print $2}' | awk -F "\"" '{print $1}'
           )
+          echo ${VERSION}
           if [ ${#VERSION} -gt 0 ]; then
             sed -i 's/^\(source-tag: \).*$/\1'"$VERSION"'/' snap/snapcraft.yaml
           fi
