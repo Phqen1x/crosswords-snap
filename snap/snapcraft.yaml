@@ -55,3 +55,8 @@ parts:
       - python3-markupsafe
       - python3-pygments
       - python3-typogrify
+    stage:
+      - -usr/libexec/installed-tests
+      - -usr/lib/*/pkgconfig/*
+      - -usr/share/gir-1.0/*
+      - -usr/include
