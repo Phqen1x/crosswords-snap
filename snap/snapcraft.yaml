@@ -35,7 +35,20 @@ apps:
     desktop: usr/share/applications/org.gnome.Crosswords.Editor.desktop
 
 parts:
+  libipuz:
+    source: https://gitlab.gnome.org/jrb/libipuz.git
+    source-type: git
+    source-tag: 0.5.1
+    plugin: meson
+    meson-parameters: [--prefix=/usr, -Ddocumentation=disabled]
+    build-packages:
+      - cargo
+    prime:
+      - usr/lib/*/liblibipuz*so*
+      - usr/lib/*/girepository-1.0
+
   crosswords:
+    after: [libipuz]
     source: https://gitlab.gnome.org/jrb/crosswords.git
     source-type: git
     source-tag: 0.3.14
@@ -55,8 +68,3 @@ parts:
       - python3-markupsafe
       - python3-pygments
       - python3-typogrify
-    stage:
-      - -usr/libexec/installed-tests
-      - -usr/lib/*/pkgconfig/*
-      - -usr/share/gir-1.0/*
-      - -usr/include
