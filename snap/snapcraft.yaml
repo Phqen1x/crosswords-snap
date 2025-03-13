@@ -38,7 +38,7 @@ parts:
   libipuz:
     source: https://gitlab.gnome.org/jrb/libipuz.git
     source-type: git
-    source-tag: 0.3.14 #libipuz
+    source-tag: 0.5.1 #libipuz
     plugin: meson
     meson-parameters: [--prefix=/usr, -Ddocumentation=disabled]
     build-packages:
