@@ -22,7 +22,7 @@ jobs:
             awk -F ": \"" '{print $2}' | awk -F "\"" '{print $1}'
           )
           if [ ${#VERSION} -gt 0 ]; then
-            sed -i 's/source-tag: .*$/source-tag: '"$VERSION"'/g' snap/snapcraft.yaml
+            sed -i 's/source-tag: .*#crosswords/source-tag: '"$VERSION"' #crosswords/g' snap/snapcraft.yaml
           fi
           
       - name: Check for modified files
