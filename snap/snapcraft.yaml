@@ -3,8 +3,8 @@ adopt-info: crosswords
 grade: stable
 confinement: strict
 base: core24
-contact: https://github.com/phqenix/crosswords-snap/issues
-issues: https://github.com/phqenix/crosswords-snap/issues
+contact: https://github.com/phqen1x/crosswords-snap/issues
+issues: https://github.com/phqen1x/crosswords-snap/issues
 website: https://gitlab.gnome.org/jrb/crosswords
 license: GPL-3.0+
 icon: icon512.png
