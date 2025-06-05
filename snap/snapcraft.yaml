@@ -51,7 +51,7 @@ parts:
     after: [libipuz]
     source: https://gitlab.gnome.org/jrb/crosswords.git
     source-type: git
-    source-tag: 0.3.14 #crosswords
+    source-tag: 0.3.15 #crosswords
     plugin: meson
     meson-parameters: [--prefix=/usr, -Ddevelopment=false]
     parse-info: [usr/share/metainfo/org.gnome.Crosswords.metainfo.xml]
