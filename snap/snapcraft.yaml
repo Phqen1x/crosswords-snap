@@ -38,11 +38,13 @@ parts:
   libipuz:
     source: https://gitlab.gnome.org/jrb/libipuz.git
     source-type: git
-    source-tag: 0.5.1 #libipuz
+    source-tag: 0.5.2 #libipuz
     plugin: meson
     meson-parameters: [--prefix=/usr, -Ddocumentation=disabled]
     build-packages:
-      - cargo
+      - cargo-1.81
+    build-environment:
+      - PATH: /usr/lib/rust-1.81/bin:$PATH
     prime:
       - usr/lib/*/liblibipuz*so*
       - usr/lib/*/girepository-1.0
@@ -56,12 +58,14 @@ parts:
     meson-parameters: [--prefix=/usr, -Ddevelopment=false]
     parse-info: [usr/share/metainfo/org.gnome.Crosswords.metainfo.xml]
     build-packages: 
-      - cargo
+      - cargo-1.81
       - python3-jinja2
       - python3-markdown
       - python3-markupsafe
       - python3-pygments
       - python3-typogrify
+    build-environment:
+      - PATH: /usr/lib/rust-1.81/bin:$PATH
     stage-packages:
       - python3-jinja2
       - python3-markdown
